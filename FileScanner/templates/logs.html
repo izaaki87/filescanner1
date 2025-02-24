@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+    <title>View Logs</title>
+    <style>
+        body { font-family: Consolas, monospace; margin: 20px; }
+        pre { background-color: #f8f8f8; border: 1px solid #ddd; padding: 10px; }
+        .btn-clear { margin-top: 10px; padding: 5px 10px; background-color: #d9534f; color: white; border: none; cursor: pointer; }
+        .btn-clear:hover { background-color: #c9302c; }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center">Log File</h1>
+    <pre>{{ log_content }}</pre>
+   <div style="text-align: center;">
+  <form action="{{ url_for('clear_logs') }}" method="post" style="display: inline-block;">
+    <button type="submit" style="background-color: #d9534f; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">Clear Logs</button>
+  </form>
+  <p style="margin-top: 15px;">
+    <a href="{{ url_for('index') }}" style="color: #007bff; text-decoration: none;">Back to Dashboard</a>
+  </p>
+</div>
+
+</body>
+</html>

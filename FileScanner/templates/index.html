@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+    <title>Malicious File Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="body-container">
+    <div class="dashboard-container">
+        <h1 class="center-text">Malicious File Dashboard</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="message-list">
+          {% for category, message in messages %}
+            <li class="message {{ category }}">{{ message }}</li>
+          {% endfor %}
+            </ul>
+
+          {% endif %}
+        {% endwith %}
+        <p class="center-text">
+          {% if monitor_dir %}
+             Currently Monitoring: <strong>{{ monitor_dir }}</strong>
+          {% else %}
+             No folder is currently being monitored.
+          {% endif %}
+        </p>
+        <p class="nav-links">
+          <a href="{{ url_for('set_monitor') }}">Set Monitor Folder</a> |
+          <a href="{{ url_for('scan_folder') }}">Scan Folder</a> |
+          <a href="{{ url_for('upload_file') }}">Upload a File</a> |
+          <a href="{{ url_for('view_logs') }}">View Logs</a>
+        </p>
+        {% if files %}
+            <table class="dashboard-table">
+                <tr>
+                    <th>File Path</th>
+                    <th>Detected Time</th>
+                    <th>Action</th>
+                </tr>
+                {% for file in files %}
+                <tr>
+                    <td>{{ file.path }}</td>
+                    <td>{{ file.timestamp }}</td>
+                    <td>
+                        <form action="{{ url_for('delete_file') }}" method="post">
+                            <input type="hidden" name="file_path" value="{{ file.path }}">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p class="center-text">No malicious files detected.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

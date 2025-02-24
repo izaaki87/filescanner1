@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+  <title>Upload File</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='monitor.css') }}">
+</head>
+<body class="body-container">
+  <div class="monitor-container">
+    <h1 class="center-text">Upload a File</h1>
+    <div class="form-container">
+      <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <br><br>
+        <input type="submit" value="Upload">
+      </form>
+    </div>
+    <p class="center-text"><a href="{{ url_for('index') }}">Back to Dashboard</a></p>
+  </div>
+</body>
+</html>

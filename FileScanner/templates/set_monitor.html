@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <title>Monitor Folder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='monitor.css') }}">
+</head>
+<body class="body-container">
+    <div class="monitor-container">
+        <h1>Folder To Monitor</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="message-list">
+              {% for category, message in messages %}
+                <li class="message {{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        <div class="form-container">
+            <form action="{{ url_for('set_monitor') }}" method="post">
+                <label for="folder_path">Folder Path (Remove whitespace):</label><br>
+                <input type="text" id="folder_path" name="folder_path" placeholder="ex > C:\Users\messi\Downloads" style="width:100%;" required>
+                <br><br>
+                <input type="submit" value="Set Monitor Folder">
+            </form>
+        </div>
+        <p><a href="{{ url_for('index') }}">Back to Dashboard</a></p>
+    </div>
+</body>
+</html>
